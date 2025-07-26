@@ -8,6 +8,7 @@ const helmet = require('helmet')
 const mongoSanitize = require('express-mongo-sanitize')
 const hpp = require('hpp')
 const cors = require('cors')
+const mongoose = require('mongoose');
 
 
 // Security middleware implement
@@ -25,6 +26,17 @@ app.use(hpp)
 app.use(limiter);
  */
 
+
+// MongoDB Connection
+let URI = "mongodb://localhost:27017/Schools";
+
+mongoose.connect(URI)
+  .then(() => {
+    console.log("✅ MongoDB connected successfully");
+  })
+  .catch((error) => {
+    console.error("❌ MongoDB connection error:", error);
+  });
 
 app.use("/api/v1", router);
 
