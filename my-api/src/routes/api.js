@@ -1,5 +1,6 @@
 const express = require('express');
 const {HelloPost, HelloGet} = require("../controllers/HelloController");
+const {InsertStudent} = require("../controllers/StudentsController");
 const router = express.Router();
 
 
@@ -9,7 +10,8 @@ router.get('/hello-get', HelloGet);
 // This is my first post routing
 router.post('/hello-post', HelloPost);
 
-
+// Moongoose
+router.post('/InsertStudent', InsertStudent);
 
 
 module.exports = router;

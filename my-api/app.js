@@ -16,6 +16,7 @@ app.use(cors)
 app.use(helmet)
 app.use(mongoSanitize)
 app.use(hpp)
+app.use(express.json());
 
 
 // Request Rate Limiter
