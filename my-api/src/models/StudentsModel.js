@@ -1,13 +1,11 @@
-const mongoose = require("mongoose")
-
+const mongoose = require("mongoose");
 
 const DataSchema = mongoose.Schema({
-    Name:String,
-    Roll:String,
-    Class:String,
-    Remarks:String,
-})
+  Name: String,
+  Roll: String,
+  Class: String,
+  Remarks: String,
+});
 
-
-const StudentsModel = mongoose.model("Students", DataSchema)
+const StudentsModel = mongoose.model("students", DataSchema);
 module.exports = StudentsModel;
