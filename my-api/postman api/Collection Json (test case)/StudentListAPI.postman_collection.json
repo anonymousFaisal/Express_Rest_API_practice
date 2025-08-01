@@ -1,0 +1,94 @@
+{
+	"info": {
+		"_postman_id": "db585abe-bb64-4c0d-bd97-a290378fa010",
+		"name": "StudentListAPI",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "46152810",
+		"_collection_link": "https://demo-team-8089.postman.co/workspace/3563b296-caec-479c-a18f-10ce9ff05011/collection/46152810-db585abe-bb64-4c0d-bd97-a290378fa010?action=share&source=collection_link&creator=46152810"
+	},
+	"item": [
+		{
+			"name": "InsertStudent",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{Base_URL}}/InsertStudent",
+					"host": [
+						"{{Base_URL}}"
+					],
+					"path": [
+						"InsertStudent"
+					]
+				},
+				"description": "### Insert Student API\n\nThis endpoint allows you to add a new student to the system. By sending a POST request with the appropriate payload, you can create a new student record.\n\n#### Request Parameters\n\nThe request body should be in JSON format and include the following parameters:\n\n- **Name** (string): The full name of the student.\n    \n- **Roll** (integer): The roll number assigned to the student.\n    \n- **Class** (string): The class or grade the student is enrolled in.\n    \n- **Mobile** (string): The mobile number of the student.\n    \n\n#### Example Request Body\n\n``` json\n{\n  \"Name\": \"Student Name\",\n  \"Roll\": 101,\n  \"Class\": \"Final Year\",\n  \"Mobile\": \"01775006172\"\n}\n\n ```\n\n#### Response Structure\n\nUpon successful execution of the request, the API will return a response indicating the status of the operation. The response typically contains:\n\n- **status** (string): Indicates whether the operation was successful or failed.\n    \n- **message** (string): A descriptive message providing additional information about the result of the operation.\n    \n\n#### Example Response\n\n``` json\n{\n  \"status\": \"success\",\n  \"message\": \"Student added successfully.\"\n}\n\n ```\n\nEnsure that all required fields are provided in the request body to avoid errors."
+			},
+			"response": []
+		},
+		{
+			"name": "ReadStudent",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{Base_URL}}/ReadStudent",
+					"host": [
+						"{{Base_URL}}"
+					],
+					"path": [
+						"ReadStudent"
+					]
+				},
+				"description": "## Read Student API\n\nThis endpoint retrieves information about students from the system. It is designed to allow clients to access student data based on specific query parameters.\n\n### Request Format\n\n- **Method**: GET\n    \n- **Endpoint**: `{{Base_URL}}/ReadStudent`\n    \n\n### Query Parameters\n\nThe request may include the following query parameters to filter the results:\n\n- `studentId` (string): The unique identifier for the student whose information is being requested.\n    \n- `classId` (string): The identifier for the class to which the student belongs. This can be used to filter students by their class.\n    \n\n### Response Structure\n\nOn a successful request, the response will return a JSON object containing the details of the student(s). The structure of the response will typically include:\n\n- `status` (string): Indicates the success or failure of the request.\n    \n- `data` (array): An array of student objects, where each object contains:\n    \n    - `id` (string): The unique identifier for the student.\n        \n    - `name` (string): The name of the student.\n        \n    - `age` (integer): The age of the student.\n        \n    - `class` (string): The class in which the student is enrolled.\n        \n    - `grades` (object): An object containing the student's grades for various subjects.\n        \n\n### Example Response\n\n``` json\n{\n  \"status\": \"success\",\n  \"data\": [\n    {\n      \"id\": \"12345\",\n      \"name\": \"John Doe\",\n      \"age\": 16,\n      \"class\": \"10th Grade\",\n      \"grades\": {\n        \"math\": \"A\",\n        \"science\": \"B+\"\n      }\n    }\n  ]\n}\n\n ```\n\nThis API is essential for applications that need to display or process student information dynamically based on user input or specific criteria."
+			},
+			"response": []
+		},
+		{
+			"name": "UpdateStudent",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"description": "## Update Student API\n\nThis endpoint allows you to update the details of a specific student identified by their unique ID. In this case, the student ID is `688b4fc9014ca316e93fcce6`.\n\n### Request\n\n- **Method**: POST\n    \n- **Endpoint**: `{{Base_URL}}/UpdateStudent/{studentId}`\n    \n\n#### Request Body\n\nThe request body must be in JSON format and should include the following parameter:\n\n- **Name** (string): The updated name of the student.\n    \n\n**Example Request Body:**\n\n``` json\n{\n  \"Name\": \"Xaki\"\n}\n\n ```\n\n### Response\n\nThe response will typically include a status indicating the success or failure of the update operation. The structure of the response may vary based on the implementation, but it generally includes:\n\n- **status** (string): Indicates whether the update was successful or if there was an error.\n    \n- **message** (string): A descriptive message providing additional context about the operation.\n    \n\n### Example Response\n\n``` json\n{\n  \"status\": \"success\",\n  \"message\": \"Student details updated successfully.\"\n}\n\n ```\n\nMake sure to replace `{studentId}` with the actual ID of the student you wish to update when making the request."
+			},
+			"response": []
+		},
+		{
+			"name": "DeleteStudent",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"description": "## Delete Student\n\nThis endpoint is used to delete a student record from the system.\n\n### Request Method\n\n- **DELETE**\n    \n\n### Endpoint\n\n- `{{Base_URL}}/DeleteStudent/{studentId}`\n    \n\n### Path Parameters\n\n- `studentId` (string): The unique identifier of the student to be deleted. In this example, it is `688a035d673961449cddfbf1`.\n    \n\n### Expected Response\n\nUpon successful deletion, the API will return a response indicating the status of the operation. The response will typically include:\n\n- A success message confirming that the student record has been deleted.\n    \n- An appropriate HTTP status code (e.g., 204 No Content for successful deletion).\n    \n\nEnsure that the correct student ID is provided in the request to avoid errors."
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "Base_URL",
+			"value": "http://localhost:5000/api/v1",
+			"type": "string"
+		}
+	]
+}
