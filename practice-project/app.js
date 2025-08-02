@@ -29,11 +29,12 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // MongoDB Database Connection
-let URI = process.env.MONGODB_URI || "mongodb://localhost:27017/Todo";
+let URI = process.env.MONGODB_URI;
 mongoose
   .connect(URI, {
     user: process.env.DB_USER || "",
     pass: process.env.DB_PASS || "",
+    autoIndex: true,
   })
   .then(() => console.log(`✅ MongoDB Connected: ${URI}`))
   .catch((err) => console.error("❌ MongoDB Connection Error:", err));
