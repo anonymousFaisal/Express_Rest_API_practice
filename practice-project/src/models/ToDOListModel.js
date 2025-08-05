@@ -19,7 +19,7 @@ const ToDoListSchema = new mongoose.Schema(
     },
     TodoStatus: {
       type: String,
-      enum: ["New", "In Progress", "Completed"], // Restricts values
+      enum: ["New", "Completed", "Cancel"], // Restricts values
     },
     TodoCreateDate: {
       type: Date,
