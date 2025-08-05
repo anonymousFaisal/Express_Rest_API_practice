@@ -11,6 +11,9 @@ module.exports = (req, res, next) => {
             });
         }
         else{
+            // Attach username to request headers for further use
+            let username = decoded.data.UserName;
+            req.headers.username = username;
             next();
         }
     })

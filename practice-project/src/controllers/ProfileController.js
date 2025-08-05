@@ -1,6 +1,8 @@
 const ProfileModel = require("../models/ProfileModel");
 var jwt = require("jsonwebtoken");
 
+
+// Create a new profile
 exports.CreateProfile = async (req, res) => {
   try {
     const reqBody = req.body;
@@ -17,6 +19,8 @@ exports.CreateProfile = async (req, res) => {
   }
 };
 
+
+// User login
 exports.UserLogin = async (req, res) => {
   try {
     const { UserName, Password } = req.body;
@@ -46,10 +50,10 @@ exports.UserLogin = async (req, res) => {
   }
 };
 
-
+// Select profile
 exports.SelectProfile = async (req, res) => {
     try {
-        const { UserName } = req.body;
+        const UserName = req.headers.username;
         const user = await ProfileModel.findOne({ UserName });
         if (!user) {
             return res.status(404).json({
@@ -68,3 +72,45 @@ exports.SelectProfile = async (req, res) => {
         });
     }
 }
+
+
+// Update profile
+exports.UpdateProfile = async (req, res) => {
+  try {
+    const UserName = req.headers.username;
+    let reqBody = { ...req.body };
+
+    // Prevent username update
+    if (reqBody.UserName) {
+      delete reqBody.UserName;
+    }
+
+    // Remove empty fields from update
+    Object.keys(reqBody).forEach(key => {
+      if (reqBody[key] === "" || reqBody[key] === null || reqBody[key] === undefined) {
+        delete reqBody[key];
+      }
+    });
+
+    // Update profile
+    const updatedProfile = await ProfileModel.findOneAndUpdate(
+      { UserName },
+      { $set: reqBody },
+      { new: true, runValidators: true }
+    );
+
+    if (!updatedProfile) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    res.status(200).json({
+      message: "Profile updated successfully",
+      data: updatedProfile
+    });
+  } catch (err) {
+    res.status(500).json({
+      message: "Error updating profile",
+      error: err.message
+    });
+  }
+};
